@@ -1,0 +1,578 @@
+{
+    "EN": {
+        "description_create_character": "SUSIKURKITE SAVO VEIKĖJĄ",
+        "title_select_category": "PASIRINKITE KATEGORIJĄ",
+        
+        "save_btn": "IŠSAUGOTI",
+        "cancel_btn": "ATŠAUKTI",
+        
+        "height": "AUKŠTIS",
+        "rotate": "PASUKTI",
+        "distance": "ATSTUMAS",
+
+        "categories": {
+            "parents": "BRUOŽAI",
+            "face": "VEIDAS",
+            "clothes": "RŪBAI",
+            "clothesets": "RŪBŲ PASIRINKIMAI",
+            "hairs": "PLAUKAI",
+            "makeup": "MAKIAŽAS"
+        },
+
+        "sex": {
+            "title": "LYTIS",
+            "sub_sex": "ID"
+        },
+        "peds": {
+            "title": "PEDS",
+            "sub_peds": "Name"
+        },
+        "parents": {
+            "title": "BRUOŽAI",
+            "sub_mom": "Mama",
+            "sub_dad": "Tėtis"
+        },
+        "face_md_weight": {
+            "title": "PANAŠUMAS",
+            "sub_face_md_weight": "Panašumas į tėvus"
+        },
+        "skin_md_weight": {
+            "title": "ODOS TAMSUMAS",
+            "sub_skin_md_weight": "Pasirinkimas"
+        },
+        "nose": {
+            "title": "NOSIS",
+            "sub_nose_1": "Nosies plotis",
+            "sub_nose_2": "Nosies viršūnės aukštis",
+            "sub_nose_3": "Nosies viršūnės ilgis",
+            "sub_nose_4": "Nosies kaulo aukštis",
+            "sub_nose_5": "Nosies viršūnė",
+            "sub_nose_6": "Nosies kaulo sukimas"
+        },
+        "cheekbones": {
+            "title": "SKRUOSTAI",
+            "sub_cheeks_1": "Skruostikaulių aukštis",
+            "sub_cheeks_2": "Skruostikaulių plotis",
+            "sub_cheeks_3": "Skruostų plotis"
+        },
+        "lips": {
+            "title": "LŪPOS",
+            "sub_lip_thickness": "Lūpų storis"
+        },
+        "jaw": {
+            "title": "ŽANDIKAULIS",
+            "sub_jaw_1": "Žandikaulio kaulo plotis",
+            "sub_jaw_2": "Žandikaulio kaulo ilgis"
+        },
+        "chin": {
+            "title": "SMAKRAS",
+            "sub_chin_1": "Smakro aukštis",
+            "sub_chin_2": "Smakro ilgis",
+            "sub_chin_3": "Smakro plotis",
+            "sub_chin_4": "Žandikaulio duobutės dydis"
+        },
+        "eye_squint": {
+            "title": "AKIŲ PLOTIS",
+            "sub_eye_squint": "Pasirinkimas"
+        },
+        "eye_color": {
+            "title": "AKIŲ SPALVA",
+            "sub_eye_color": "Spalva"
+        },
+        "blemishes": {
+            "title": "PARAUDIMAI",
+            "sub_blemishes_1": "ID",
+            "sub_blemishes_2": "Tankumas"
+        },
+        "complexion": {
+            "title": "BĖRIMAI",
+            "sub_complexion_1": "ID",
+            "sub_complexion_2": "Tankumas"
+        },
+        "sun": {
+            "title": "SAULĖS NUDEGIMAI",
+            "sub_sun_1": "ID",
+            "sub_sun_2": "Tankumas"
+        },
+        "moles": {
+            "title": "APGAMAI",
+            "sub_moles_1": "ID",
+            "sub_moles_2": "Tankumas"
+        },
+        "tshirt": {
+            "title": "MARŠKINĖLIAI",
+            "sub_tshirt_1": "Pasirinkimas",
+            "sub_tshirt_2": "Spalva"
+        },
+        "torso": {
+            "title": "VIRŠUTINIAI DRABUŽIAI",
+            "sub_torso_1": "Pasirinkimas",
+            "sub_torso_2": "Spalva"
+        },
+        "arms": {
+            "title": "RANKOS",
+            "sub_arms": "Pasirinkimas",
+            "sub_arms_2": "Spalva"
+        },
+        "pants": {
+            "title": "KELNĖS",
+            "sub_pants_1": "Pasirinkimas",
+            "sub_pants_2": "Spalva"
+        },
+        "shoes": {
+            "title": "BATAI",
+            "sub_shoes_1": "Pasirinkimas",
+            "sub_shoes_2": "Spalva"
+        },
+        "decals": {
+            "title": "LIPDUKAI",
+            "sub_decals_1": "Pasirinkimas",
+            "sub_decals_2": "Spalva"
+        },
+        "mask": {
+            "title": "KAUKĖ",
+            "sub_mask_1": "Pasirinkimas",
+            "sub_mask_2": "Spalva"
+        },
+        "bproof": {
+            "title": "APSAUGINĖS LIEMENĖS",
+            "sub_bproof_1": "Pasirinkimas",
+            "sub_bproof_2": "Spalva"
+        },
+        "chain": {
+            "title": "GRANDINĖLĖS",
+            "sub_chain_1": "Pasirinkimas",
+            "sub_chain_2": "Spalva"
+        },
+        "helmet": {
+            "title": "KEPURĖ",
+            "sub_helmet_1": "Pasirinkimas",
+            "sub_helmet_2": "Spalva"
+        },
+        "glasses": {
+            "title": "AKINIAI",
+            "sub_glasses_1": "Pasirinkimas",
+            "sub_glasses_2": "Spalva"
+        },
+        "watches": {
+            "title": "LAIKRODŽIAI",
+            "sub_watches_1": "Pasirinkimas",
+            "sub_watches_2": "Spalva"
+        },
+        "bracelets": {
+            "title": "APYRANKĖS",
+            "sub_bracelets_1": "Pasirinkimas",
+            "sub_bracelets_2": "Spalva"
+        },
+        "bags": {
+            "title": "KUPRINĖS",
+            "sub_bags_1": "Pasirinkimas",
+            "sub_bags_2": "Spalva"
+        },
+        "ears": {
+            "title": "AUSKARAI",
+            "sub_ears_1": "Pasirinkimas",
+            "sub_ears_2": "Spalva"
+        },
+        "clothesets": {
+            "title": "RŪBŲ PASIRINKIMAI",
+            "sub_clothesets": "Pasirinkimas",
+            "none": "NONE"
+        },
+        "hair": {
+            "title": "PLAUKAI",
+            "sub_hair_1": "Pasirinkimas",
+            "sub_hair_2": "Tekstūros",
+            "sub_hair_color_1": "Spalva",
+            "sub_hair_color_2": "Spalva II"
+        },
+        "beard": {
+            "title": "BARZDOS",
+            "sub_beard_1": "Pasirinkimas",
+            "sub_beard_2": "Tankumas",
+            "sub_beard_3": "Spalva"
+        },
+        "neck_thickness": {
+            "title": "KAKLO APIMTIS",
+            "sub_neck_thickness": "Pasirinkimas"
+        },
+        "ageing": {
+            "title": "AMŽIUS",
+            "sub_age_1": "Tipas",
+            "sub_age_2": "Apimtis"
+        },
+        "eyebrow": {
+            "title": "ANTAKIAI",
+            "sub_eyebrows_1": "Pasirinkimas",
+            "sub_eyebrows_2": "Tankumas",
+            "sub_eyebrows_3": "Spalva",
+            "sub_eyebrows_5": "Antakių aukštis",
+            "sub_eyebrows_6": "Antakių gylis"
+        },
+        "chesthair": {
+            "title": "KRŪTINĖS PLAUKAI",
+            "sub_chest_1": "Pasirinkimas",
+            "sub_chest_2": "Tankumas",
+            "sub_chest_3": "Spalva"
+        },
+        "makeup": {
+            "title": "MAKIAŽAS",
+            "sub_makeup_1": "Pasirinkimas",
+            "sub_makeup_2": "Tankumas",
+            "sub_makeup_3": "Spalva",
+            "sub_makeup_4": "Spalva II"
+        },
+        "blush": {
+            "title": "SKAISTALAI",
+            "sub_blush_1": "Pasirinkimas",
+            "sub_blush_2": "Tankumas",
+            "sub_blush_3": "Spalva"
+        },
+        "lipstick": {
+            "title": "LŪPDAŽIS",
+            "sub_lipstick_1": "Pasirinkimas",
+            "sub_lipstick_2": "Tankumas",
+            "sub_lipstick_3": "Spalva"
+        },
+        "parents_names": {
+            "dad": {
+                "0": "Benjamin",
+                "1": "Daniel",
+                "2": "Joshua",
+                "3": "Noah",
+                "4": "Andrew",
+                "5": "Juan",
+                "6": "Alex",
+                "7": "Isaac",
+                "8": "Evan",
+                "9": "Ethan",
+                "10": "Vincent",
+                "11": "Angel",
+                "12": "Diego",
+                "13": "Adrian",
+                "14": "Gabriel",
+                "15": "Michael",
+                "16": "Santiago",
+                "17": "Kevin",
+                "18": "Louis",
+                "19": "Samuel",
+                "20": "Anthony",
+                "42": "John",
+                "43": "Niko",
+                "44": "Claude"
+            },
+            "mom": {
+                "21": "Hannah",
+                "22": "Audrey",
+                "23": "Jasmine",
+                "24": "Giselle",
+                "25": "Amelia",
+                "26": "Isabella",
+                "27": "Zoe",
+                "28": "Ava",
+                "29": "Camilla",
+                "30": "Violet",
+                "31": "Sophia",
+                "32": "Eveline",
+                "33": "Nicole",
+                "34": "Ashley",
+                "35": "Grace",
+                "36": "Brianna",
+                "37": "Natalie",
+                "38": "Olivia",
+                "39": "Elizabeth",
+                "40": "Charlotte",
+                "41": "Emma",
+                "45": "Misty"
+            }
+        }
+    },
+    "PL": {
+        "description_create_character": "STWÓRZ SWOJĄ POSTAĆ",
+        "title_select_category": "WYBIERZ KATEGORIĘ",
+        
+        "save_btn": "ZAPISZ",
+        "cancel_btn": "ANULUJ",
+        
+        "height": "WZROST",
+        "rotate": "OBRÓT",
+        "distance": "DYSTANS",
+
+        "categories": {
+            "parents": "RODZICE",
+            "face": "TWARZ",
+            "clothes": "UBRANIA",
+            "clothesets": "GOTOWE UBIORY",
+            "hairs": "OWŁOSIENIE",
+            "makeup": "MAKIJAŻ"
+        },
+
+        "sex": {
+            "title": "PŁEĆ",
+            "sub_sex": "Wartość"
+        },
+        "peds": {
+            "title": "PED",
+            "sub_peds": "Nazwa"
+        },
+        "parents": {
+            "title": "PARENTS",
+            "sub_mom": "Mama",
+            "sub_dad": "Tata"
+        },
+        "face_md_weight": {
+            "title": "PODOBIEŃSTWO",
+            "sub_face_md_weight": "Podobieństwo do rodziców"
+        },
+        "skin_md_weight": {
+            "title": "TONACJA SKÓRY",
+            "sub_skin_md_weight": "Wartość"
+        },
+        "nose": {
+            "title": "NOS",
+            "sub_nose_1": "Szerokość nosa",
+            "sub_nose_2": "Wysokość czubka nosa",
+            "sub_nose_3": "Długość czubka nosa",
+            "sub_nose_4": "Wysokość kości nosa",
+            "sub_nose_5": "Obniżenie czubka nosa",
+            "sub_nose_6": "Skrzywienie nosa"
+        },
+        "cheekbones": {
+            "title": "KOŚCI POLICZKOWE",
+            "sub_cheeks_1": "Wysokość kości",
+            "sub_cheeks_2": "Szerokość kości",
+            "sub_cheeks_3": "Szerokość policzków"
+        },
+        "lips": {
+            "title": "USTWA",
+            "sub_lip_thickness": "Grubość"
+        },
+        "jaw": {
+            "title": "SZCZĘKA",
+            "sub_jaw_1": "Szerokość kości",
+            "sub_jaw_2": "Długość kości"
+        },
+        "chin": {
+            "title": "PODBRÓDEK",
+            "sub_chin_1": "Wysokość",
+            "sub_chin_2": "Długość",
+            "sub_chin_3": "Szerokość",
+            "sub_chin_4": "Rozmiar otworu"
+        },
+        "eye_squint": {
+            "title": "ZMRUŻENIE OCZU",
+            "sub_eye_squint": "Wartość"
+        },
+        "eye_color": {
+            "title": "KOLOR OCZU",
+            "sub_eye_color": "Kolor"
+        },
+        "blemishes": {
+            "title": "SKAZY",
+            "sub_blemishes_1": "Wartość",
+            "sub_blemishes_2": "Krycie"
+        },
+        "complexion": {
+            "title": "CERA",
+            "sub_complexion_1": "Wartość",
+            "sub_complexion_2": "Krycie"
+        },
+        "sun": {
+            "title": "OPALENIE",
+            "sub_sun_1": "Wartość",
+            "sub_sun_2": "Krycie"
+        },
+        "moles": {
+            "title": "PIEGI",
+            "sub_moles_1": "Wartość",
+            "sub_moles_2": "Krycie"
+        },
+        "tshirt": {
+            "title": "KOSZULKA",
+            "sub_tshirt_1": "Przedmiot",
+            "sub_tshirt_2": "Tekstura"
+        },
+        "torso": {
+            "title": "BLUZA",
+            "sub_torso_1": "Przedmiot",
+            "sub_torso_2": "Tekstura"
+        },
+        "arms": {
+            "title": "RAMIONA",
+            "sub_arms": "Przedmiot",
+            "sub_arms_2": "Tekstura"
+        },
+        "pants": {
+            "title": "SPODNIE",
+            "sub_pants_1": "Przedmiot",
+            "sub_pants_2": "Tekstura"
+        },
+        "shoes": {
+            "title": "BUTY",
+            "sub_shoes_1": "Przedmiot",
+            "sub_shoes_2": "Tekstura"
+        },
+        "decals": {
+            "title": "DODATKI",
+            "sub_decals_1": "Przedmiot",
+            "sub_decals_2": "Tekstura"
+        },
+        "mask": {
+            "title": "MASKI",
+            "sub_mask_1": "Przedmiot",
+            "sub_mask_2": "Tekstura"
+        },
+        "bproof": {
+            "title": "KAMIZELKI",
+            "sub_bproof_1": "Przedmiot",
+            "sub_bproof_2": "Tekstura"
+        },
+        "chain": {
+            "title": "NASZYJNIKI",
+            "sub_chain_1": "Przedmiot",
+            "sub_chain_2": "Tekstura"
+        },
+        "helmet": {
+            "title": "NAKRYCIA GŁOWY",
+            "sub_helmet_1": "Przedmiot",
+            "sub_helmet_2": "Tekstura"
+        },
+        "glasses": {
+            "title": "OKULARY",
+            "sub_glasses_1": "Przedmiot",
+            "sub_glasses_2": "Tekstura"
+        },
+        "watches": {
+            "title": "ZEGARKI",
+            "sub_watches_1": "Przedmiot",
+            "sub_watches_2": "Tekstura"
+        },
+        "bracelets": {
+            "title": "BRANSOLETKI",
+            "sub_bracelets_1": "Przedmiot",
+            "sub_bracelets_2": "Tekstura"
+        },
+        "bags": {
+            "title": "TORBY",
+            "sub_bags_1": "Przedmiot",
+            "sub_bags_2": "Tekstura"
+        },
+        "ears": {
+            "title": "AKCESORIA DO USZU",
+            "sub_ears_1": "Przedmiot",
+            "sub_ears_2": "Tekstura"
+        },
+        "clothesets": {
+            "title": "GOTOWY UBIÓR",
+            "sub_clothesets": "Ubiór",
+            "none": "NONE"
+        },
+        "hair": {
+            "title": "WŁOSY",
+            "sub_hair_1": "Wartość",
+            "sub_hair_2": "Tekstura",
+            "sub_hair_color_1": "Kolor",
+            "sub_hair_color_2": "Kolor II"
+        },
+        "beard": {
+            "title": "BRODA",
+            "sub_beard_1": "Wartość",
+            "sub_beard_2": "Krycie",
+            "sub_beard_3": "Kolor"
+        },
+        "neck_thickness": {
+            "title": "GRUBOŚĆ SZYI",
+            "sub_neck_thickness": "Wartość"
+        },
+        "ageing": {
+            "title": "ZMARSZCZKI",
+            "sub_age_1": "Type",
+            "sub_age_2": "Thickness"
+        },
+        "eyebrow": {
+            "title": "BRWI",
+            "sub_eyebrows_1": "Wartość",
+            "sub_eyebrows_2": "Krycie",
+            "sub_eyebrows_3": "Kolor",
+            "sub_eyebrows_5": "Wysokość",
+            "sub_eyebrows_6": "Głębokość"
+        },
+        "chesthair": {
+            "title": "WŁOSY KLATKI PIERSIOWEJ",
+            "sub_chest_1": "Wartość",
+            "sub_chest_2": "Krycie",
+            "sub_chest_3": "Kolor"
+        },
+        "makeup": {
+            "title": "MAKIJAŻ",
+            "sub_makeup_1": "Wartość",
+            "sub_makeup_2": "Krycie",
+            "sub_makeup_3": "Kolor",
+            "sub_makeup_4": "Kolor II"
+        },
+        "blush": {
+            "title": "RUMIEŃCE",
+            "sub_blush_1": "Wartość",
+            "sub_blush_2": "Krycie",
+            "sub_blush_3": "Kolor"
+        },
+        "lipstick": {
+            "title": "SZMINKA",
+            "sub_lipstick_1": "Wartość",
+            "sub_lipstick_2": "Krycie",
+            "sub_lipstick_3": "Kolor"
+        },
+        "parents_names": {
+            "dad": {
+                "0": "Benjamin",
+                "1": "Daniel",
+                "2": "Joshua",
+                "3": "Noah",
+                "4": "Andrew",
+                "5": "Juan",
+                "6": "Alex",
+                "7": "Isaac",
+                "8": "Evan",
+                "9": "Ethan",
+                "10": "Vincent",
+                "11": "Angel",
+                "12": "Diego",
+                "13": "Adrian",
+                "14": "Gabriel",
+                "15": "Michael",
+                "16": "Santiago",
+                "17": "Kevin",
+                "18": "Louis",
+                "19": "Samuel",
+                "20": "Anthony",
+                "42": "John",
+                "43": "Niko",
+                "44": "Claude"
+            },
+            "mom": {
+                "21": "Hannah",
+                "22": "Audrey",
+                "23": "Jasmine",
+                "24": "Giselle",
+                "25": "Amelia",
+                "26": "Isabella",
+                "27": "Zoe",
+                "28": "Ava",
+                "29": "Camilla",
+                "30": "Violet",
+                "31": "Sophia",
+                "32": "Eveline",
+                "33": "Nicole",
+                "34": "Ashley",
+                "35": "Grace",
+                "36": "Brianna",
+                "37": "Natalie",
+                "38": "Olivia",
+                "39": "Elizabeth",
+                "40": "Charlotte",
+                "41": "Emma",
+                "45": "Misty"
+            }
+        }
+    }
+}

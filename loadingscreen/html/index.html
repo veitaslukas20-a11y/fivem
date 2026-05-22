@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8" />
+  <title>ZYNEX - Loading</title>
+  <script src="nui://game/ui/jquery.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Orbitron:wght@400;700;900&display=swap" />
+</head>
+<body>
+
+  <div id="bg">
+    <img src="bg.png" alt="Background" />
+    <div id="bg-overlay"></div>
+  </div>
+
+  <audio id="music" loop>
+    <source src="audio.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- LEFT PANELS -->
+  <div id="left-panels">
+
+    <!-- MUSIC PLAYER -->
+    <div class="panel" id="music-panel">
+      <div class="panel-header">
+        <span class="panel-label">GROJAMA DABAR</span>
+        <div class="sound-bars">
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="music-body">
+        <div class="album-art">
+          <img src="logo.png" alt="Album" id="album-img" />
+        </div>
+        <div class="track-info">
+          <div class="track-title" id="track-title">ZYNEX</div>
+          <div class="track-artist" id="track-artist">ZYNEX Roleplay</div>
+        </div>
+      </div>
+      <div class="music-time">
+        <span id="current-time">00:00</span>
+        <div class="music-progress">
+          <div class="music-progress-fill" id="music-progress-fill"></div>
+        </div>
+        <span id="total-time">00:00</span>
+      </div>
+      <div class="music-controls">
+        <button onclick="prevTrack()"><i class="fas fa-backward-step"></i></button>
+        <button id="play-btn" onclick="togglePlay()"><i class="fas fa-pause"></i></button>
+        <button onclick="nextTrack()"><i class="fas fa-forward-step"></i></button>
+      </div>
+      <div class="volume-row">
+        <i class="fas fa-volume-low"></i>
+        <input type="range" id="volume" min="0" max="1" step="0.01" value="0.3" />
+      </div>
+    </div>
+
+    <!-- DISCORD WIDGET -->
+    <div class="panel" id="discord-panel">
+      <div class="panel-header">
+        <span class="panel-label">PRISIJUNK PRIE MUS</span>
+        <span class="online-dot"><span class="dot"></span> <span id="online-count">0</span> ONLINE</span>
+      </div>
+      <div class="discord-body">
+        <div class="discord-icon"><i class="fab fa-discord"></i></div>
+        <div class="discord-info">
+          <div class="discord-name">ZYNEX Discord</div>
+          <div class="discord-link">discord.gg/UAN7Zh4BQ</div>
+        </div>
+        <a href="https://discord.gg/UAN7Zh4BQ" target="_blank" class="discord-btn">
+          PRISIJUNGTI <i class="fas fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT PANELS -->
+  <div id="right-panels">
+    <div class="panel" id="rules-panel">
+      <div class="panel-header">
+        <span class="panel-label">SERVERIO TAISYKLĖS</span>
+        <i class="fas fa-scroll" style="color: #4a9eff; font-size: 14px;"></i>
+      </div>
+      <div class="rules-scroll-area">
+        <div class="rules-list" id="rules-list">
+          <div class="rule">
+            <span class="rule-num">01</span>
+            <div class="rule-text">
+              <strong>Pagarba visiems</strong>
+              <p>Gerbkite visus žaidėjus ir administraciją. Draudžiamas bet koks užgauliojimas, rasizmas ar diskriminacija.</p>
+            </div>
+          </div>
+          <div class="rule">
+            <span class="rule-num">02</span>
+            <div class="rule-text">
+              <strong>RDM / VDM draudžiamas</strong>
+              <p>Draudžiama žudyti ar traiškyti žaidėjus be jokios roleplay priežasties.</p>
+            </div>
+          </div>
+          <div class="rule">
+            <span class="rule-num">03</span>
+            <div class="rule-text">
+              <strong>Metagaming draudžiamas</strong>
+              <p>Draudžiama naudoti informaciją gautą ne per roleplay (Discord, stream ir pan.).</p>
+            </div>
+          </div>
+          <div class="rule">
+            <span class="rule-num">04</span>
+            <div class="rule-text">
+              <strong>Powergaming draudžiamas</strong>
+              <p>Draudžiama versti kitus žaidėjus atlikti veiksmus be jų sutikimo arba daryti nerealius veiksmus.</p>
+            </div>
+          </div>
+          <div class="rule">
+            <span class="rule-num">05</span>
+            <div class="rule-text">
+              <strong>New Life Rule</strong>
+              <p>Po mirties negalite grįžti į mirties vietą ir naudoti informacijos iš praeito gyvenimo.</p>
+            </div>
+          </div>
+          <div class="rule">
+            <span class="rule-num">06</span>
+            <div class="rule-text">
+              <strong>SafeZone taisyklė</strong>
+              <p>Saugiose zonose (ligoninė, policija, garažai) draudžiama vykdyti nusikaltimus.</p>
+            </div>
+          </div>
+          <div class="rule">
+            <span class="rule-num">07</span>
+            <div class="rule-text">
+              <strong>Realus roleplay</strong>
+              <p>Elkitės taip, kaip elgtumėtės realiame gyvenime. Roleplay turi būti tikroviškas.</p>
+            </div>
+          </div>
+          <div class="rule">
+            <span class="rule-num">08</span>
+            <div class="rule-text">
+              <strong>Cheatai / Modifikacijos</strong>
+              <p>Bet kokie cheatai, modai ar exploitai yra griežtai draudžiami. Bauda — permanentinis banas.</p>
+            </div>
+          </div>
+          <div class="rule">
+            <span class="rule-num">09</span>
+            <div class="rule-text">
+              <strong>Mikrofonas privalomas</strong>
+              <p>Norint žaisti serveryje, privalote turėti veikiantį mikrofoną ir juo naudotis.</p>
+            </div>
+          </div>
+          <div class="rule">
+            <span class="rule-num">10</span>
+            <div class="rule-text">
+              <strong>Administracijos sprendimai</strong>
+              <p>Administracijos sprendimai yra galutiniai. Skundus galite pateikti per Discord.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOADING BAR -->
+  <div id="loading-area">
+    <div id="loading-text">JUNGIAMASI PRIE SERVERIO...</div>
+    <div id="loading-bar-wrap">
+      <div id="loading-bar-fill"></div>
+    </div>
+    <div id="loading-percent">0%</div>
+  </div>
+
+  <!-- FOOTER -->
+  <div id="footer">
+    <span>2025 © ZYNEX</span>
+    <span>VISOS TEISĖS SAUGOMOS</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
