@@ -1,0 +1,22 @@
+server_script '@ElectronAC/src/include/server.lua'
+client_script '@ElectronAC/src/include/client.lua'
+fx_version 'adamant'
+
+game 'gta5'
+lua54 'yes'
+description 'A basic duty system for Jobs'
+
+version '1.0'
+legacyversion '1.13.4'
+
+shared_script '@es_extended/imports.lua'
+
+server_scripts {
+	'server/main.lua'
+}
+
+client_scripts {
+	'client/main.lua'
+}
+
+dependency 'es_extended'

@@ -1,0 +1,195 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+	box-sizing: border-box;
+}
+
+.menu {
+	font-family: 'Overpass';
+    min-width: 400px;
+    max-width: 100%;
+    position: absolute;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background: rgba(21, 25, 41, 0.6);
+    max-height: 60vh;
+	padding-bottom: 45px;
+    /* overflow-y: hidden; */
+
+}
+
+
+
+
+.menu.align-left {
+	left: 40;
+	top: 50%;
+	transform: translate(0, -50%);
+}
+
+.menu.align-top-left {
+	left: 40;
+	top: 40;
+}
+
+.menu.align-top {
+	left: 50%;
+	top: 40;
+	transform: translate(-50%, 0);
+}
+
+.menu.align-top-right {
+	right: 40;
+	top: 50%;
+	transform: translate(0, -50%);
+}
+
+.menu.align-right {
+	right: 40;
+	top: 50%;
+	transform: translate(0, -50%);
+}
+
+.menu.align-bottom-right {
+	right: 40;
+	bottom: 40;
+}
+
+.menu.align-bottom {
+	left: 50%;
+	bottom: 40;
+	transform: translate(-50%, 0);
+}
+
+.menu.align-bottom-left {
+	left: 40;
+	bottom: 40;
+}
+
+.menu.align-center {
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.menu .head {
+	position: inherit;
+    height: 85px;
+    background: rgba(20, 27, 43, 0.7);
+    border-radius: 10px 10px 0px 0px;
+}
+
+.head-title {
+	position: relative;
+    font-weight: 700;
+    font-family: 'Overpass';
+    color: white;
+    text-transform: uppercase;
+    top: 1.5rem;
+    left: 1.75rem;
+}
+
+.head-subtitle {
+	position: absolute;
+    font-family: 'Overpass';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: #CECECE;
+    top: 2.9375rem;
+    left: 1.8125rem;
+}
+
+.menu .menu-items {
+	margin: auto;
+	max-height: 40.5vh;
+
+	overflow-y: hidden;
+	/* max-height: 600px; */
+	/* overflow-y: hidden; */
+
+}
+
+@keyframes scaleUp {
+
+    from {
+		background-color: rgb(36, 36, 38);
+        backface-visibility: hidden;
+        transform: scale(0.95);
+    }
+    to {
+		background-color: #07575b;
+        backface-visibility: hidden;
+        transform: scale(1);
+		border: 1px solid rgba(158, 158, 158, 0.432);
+    }
+  }
+
+.menu .menu-items .menu-item {
+    height: 35px;
+    align-items: center;
+    display: flex;
+    text-decoration: none;
+
+	background: rgba(19, 26, 41, 0.6);
+	box-sizing: border-box;
+	border-radius: 5px;
+    padding: 1.5rem 1.5rem;
+	font-family: 'Overpass';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	/* line-height: 18px; */
+	color: #FFFFFF;
+
+	margin-top: 5px;
+
+	/* display: block; */
+}
+
+.active {
+	background: #007EF0 !important;
+}
+
+.menu-item:hover, .menu-item:focus {
+	background: rgba(19, 26, 41, 0.9) !important;
+	border: 0.2px solid #FFFFFF;
+	box-sizing: border-box;
+	border-radius: 5px;
+}
+
+.selected {
+	background: rgba(19, 26, 41, 0.9) !important;
+	border: 0.2px solid #FFFFFF;
+	box-sizing: border-box;
+	border-radius: 5px;
+}
+.fas, .fab{
+	color:#BEBEBE;
+}
+
+.menu-item-selection {
+	background: #242B3A;
+	border-radius: 10px 0px 0px 10px;
+	width: 0.3125rem;
+	height: 48px;
+	position: relative;
+    left: -24px;
+}
+.menu-item-icon {
+    padding-right: 10px;
+}
+.menu-items {
+    top: 1.25rem;
+    width: 85%;
+    position: relative;
+}
+.menu-items-container {
+	position: relative;
+    display: flex;
+    justify-content: center;
+}
