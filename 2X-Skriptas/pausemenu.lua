@@ -1,0 +1,16 @@
+function AddTextEntry(key, value)
+	Citizen.InvokeNative(GetHashKey("ADD_TEXT_ENTRY"), key, '<font face="Roboto">'..value..'</font>')
+end
+
+Citizen.CreateThread(function()
+  AddTextEntry('FE_THDR_GTAO', '~b~TWOX.~w~LT')
+  AddTextEntry('PM_PANE_LEAVE', '~y~Išeiti iš serverio')
+  AddTextEntry('PM_PANE_QUIT', '~y~Išjungti žaidimą')
+  AddTextEntry('PM_SCR_MAP', '~y~Žemėlapis')
+  AddTextEntry('PM_SCR_GAM', '~y~Išeiti')
+  AddTextEntry('PM_SCR_INF', '~y~Įrašai')
+  AddTextEntry('PM_SCR_SET', '~y~Nustatymai')
+  AddTextEntry('PM_SCR_STA', '~y~Statistika')
+  AddTextEntry('PM_SCR_GAL', '~y~Galerija')
+  AddTextEntry('PM_SCR_RPL', '~y~Redaktorius')
+end)

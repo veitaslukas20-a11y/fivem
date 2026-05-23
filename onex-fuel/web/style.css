@@ -1,0 +1,219 @@
+:root {
+  --bg:#0f1115; 
+  --panel:#1a1f2a; 
+  --panel-2:#232a36; 
+  --text:#ecf0f8; 
+  --muted:#9aa3b2;
+  --primary:#2f7cff; 
+  --primary-2:#1f61d8; 
+  --accent:#3a4150; 
+  --shadow:0 12px 40px rgba(0,0,0,.45);
+  --radius:18px;
+}
+
+* { box-sizing: border-box }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  background: transparent;
+}
+
+/* --- Pagrindinis konteineris --- */
+#root {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Pašalinta juoda skaidri danga */
+  background: transparent;
+  backdrop-filter: none;
+
+  /* Kad spustelejimai eitu pro fona */
+  pointer-events: none;
+}
+
+/* Tik panele reaguoja i pele */
+.panel {
+  pointer-events: all;
+  width: min(560px, 92vw);
+  background: linear-gradient(180deg, var(--panel) 0%, #151924 100%);
+  border: 1px solid #2a3242;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px 22px 18px;
+}
+
+.panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.panel__header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.icon-btn {
+  appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: var(--panel-2);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 8px 10px;
+  font-size: 14px;
+  transition: .15s transform ease;
+}
+
+.icon-btn:hover { transform: scale(1.04) }
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin: 12px 0 14px;
+}
+
+.tab {
+  flex: 0 0 auto;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid #2d3546;
+  background: var(--panel-2);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: .4px;
+}
+
+.tab--active {
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
+}
+
+.info {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.info__label { font-size: 13px; color: var(--muted) }
+.info__value { font-size: 20px; font-weight: 700 }
+
+.info__group--right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.chip {
+  background: var(--panel-2);
+  border: 1px solid #2d3546;
+  border-radius: 14px;
+  padding: 8px 12px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.chip__price { font-weight: 700 }
+.chip__stock { font-size: 13px; color: var(--muted) }
+.total { font-size: 22px; font-weight: 800 }
+
+.slider { margin: 18px 0 16px }
+input[type="range"] { width: 100% }
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pay-methods { display: flex; gap: 14px }
+
+.radio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--panel-2);
+  border: 1px solid #2d3546;
+  padding: 6px 10px;
+  border-radius: 12px;
+}
+
+.primary {
+  appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: var(--primary);
+  color: white;
+  font-weight: 800;
+  letter-spacing: .6px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  min-width: 180px;
+  text-transform: uppercase;
+  transition: background .15s ease;
+}
+
+.primary:hover { background: var(--primary-2) }
+
+.divider { height: 1px; background: #2a3242; margin: 18px 0 }
+
+.extras__title {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.extras__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.card__icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.4));
+}
+
+.card {
+  background: var(--panel-2);
+  border: 1px solid #2d3546;
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.card__left { display: flex; align-items: center; gap: 10px }
+.card__title { font-weight: 700 }
+.card__price { font-weight: 800 }
+
+.card__buy {
+  appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: var(--primary);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-weight: 800;
+}

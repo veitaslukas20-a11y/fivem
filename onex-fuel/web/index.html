@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="lt">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Degalinė</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div id="root" style="display:none">
+    <div class="panel">
+      <div class="panel__header">
+        <h1>Degalinė</h1>
+        <button id="btnClose" class="icon-btn" aria-label="Uždaryti">✕</button>
+      </div>
+
+      <div class="tabs">
+        <button id="tab95" class="tab tab--active" data-fuel="regular">95</button>
+        <button id="tab98" class="tab" data-fuel="premium">98</button>
+      </div>
+
+      <div class="info">
+        <div class="info__group">
+          <div class="info__label">Kiekis</div>
+          <div id="txtLiters" class="info__value">0.00 L</div>
+        </div>
+        <div class="info__group info__group--right">
+          <div class="chip">
+            <div class="chip__price"><span id="txtPricePer">45.00</span> € / L</div>
+            <div class="chip__stock">Degalinėje: <span id="txtStock">—</span> L</div>
+          </div>
+          <div id="txtTotal" class="total">0 €</div>
+        </div>
+      </div>
+
+      <div class="slider"><input id="rangeLiters" type="range" min="0" max="100" step="0.01" value="0"/></div>
+
+      <div class="actions">
+        <div class="pay-methods">
+          <label class="radio"><input type="radio" name="pay" value="cash" checked/><span>Grynais</span></label>
+          <label class="radio"><input type="radio" name="pay" value="bank"/><span>Banku</span></label>
+        </div>
+        <button id="btnFill" class="primary">PILDYTI</button>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="extras">
+        <div class="extras__title">Papildomos prekės</div>
+        <div id="extraList" class="extras__list"></div>
+      </div>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
