@@ -380,16 +380,24 @@ lib.addKeybind({
     defaultKey = 'E',
     onPressed = function(self)
         if not InsidePoint then return end
+		local pedCoords = GetEntityCoords(cache.ped)
+
+		if Points['clothing'] then
+			for _, point in pairs(Points['clothing']) do
+				if #(pedCoords - point.coords) <= 2.5 then
+					OpenCloakroomMenu()
+					return
+				end
+			end
+		end
+
 		if not CurrentPoint then return end
 		if not PointCoords then return end
+		if #(pedCoords - PointCoords) > 2.5 then return end
 
-		if #(GetEntityCoords(cache.ped) - PointCoords) > 2.5 then return end
-
-		if CurrentPoint == 'clothing' then 
-			OpenCloakroomMenu()
-		elseif CurrentPoint == 'bossactions' then 
+		if CurrentPoint == 'bossactions' then
 			exports['s1m1s-bossmenu']:openMenu(true)
-		elseif CurrentPoint == 'vehicles' then 
+		elseif CurrentPoint == 'vehicles' then
 			if not PointInfo then return end
 			Garage().OpenMenu(PointInfo)
 		end
