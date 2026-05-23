@@ -1,6 +1,6 @@
 local OnDuty = false
 local Job = {}
-local Garage = exports['dec4t-jobgarage']:initGarages()
+local Garage = exports['s1m1s-jobgarage']:initGarages()
 
 function IsMechanic()
 	return Config.Jobs[Job.name]
