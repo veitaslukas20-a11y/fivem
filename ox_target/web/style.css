@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+body {
+  visibility: hidden;
+  user-select: none;
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Inter';
+}
+
+p {
+  margin: 0;
+}
+
+#eye {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 4rem;
+  width: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-dark);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+#eye .eye-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  background: #121316E6;
+}
+
+#eye .eye-inner:hover {
+  animation: none !important;
+  background: #0085FF !important;
+}
+
+#eye.eye-active .eye-inner {
+  background: #0084ff71;
+  animation: pulse 1.5s infinite;
+}
+
+.eye-icon {
+  font-size: 1.4rem;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+#options-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.options-visible {
+  pointer-events: all !important;
+}
+
+.option-container {
+  position: absolute;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #121316F2;
+  border-radius: 0.3rem;
+  padding: 1rem 1rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  white-space: nowrap;
+  opacity: 0;
+  min-width: 7rem;
+}
+
+.option-container.show {
+  opacity: 1;
+}
+
+.option-container:hover {
+  background: #0085FF;
+  transform: scale(1.05);
+}
+
+.option-icon {
+  font-size: 0.8rem;
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.option-label {
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.option-container:nth-child(1) { transition-delay: 0.1s; }
+.option-container:nth-child(2) { transition-delay: 0.15s; }
+.option-container:nth-child(3) { transition-delay: 0.2s; }
+.option-container:nth-child(4) { transition-delay: 0.25s; }
+.option-container:nth-child(5) { transition-delay: 0.3s; }
+.option-container:nth-child(6) { transition-delay: 0.35s; }
+.option-container:nth-child(7) { transition-delay: 0.4s; }
+.option-container:nth-child(8) { transition-delay: 0.45s; }
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 132, 255, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(0, 132, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 132, 255, 0);
+  }
+}
