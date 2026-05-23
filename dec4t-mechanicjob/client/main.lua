@@ -247,7 +247,7 @@ function InitZones()
 		
 		function point:nearby()
 			DrawMarker(Config.MarkerType.Cloakrooms, self.coords, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.5, 0.5, 0.5, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, true, false, false, false)
-			if #(GetEntityCoords(cache.ped) - self.coords) < 1.5 then
+			if #(GetEntityCoords(cache.ped) - self.coords) < 2.5 then
 				BeginTextCommandDisplayHelp('STRING')
 				AddTextComponentSubstringPlayerName('Spauskite ~INPUT_CONTEXT~ ~HUD_COLOUR_FREEMODE~persirengti')
 				EndTextCommandDisplayHelp(0, false, true, -1)
@@ -383,7 +383,7 @@ lib.addKeybind({
 		if not CurrentPoint then return end
 		if not PointCoords then return end
 
-		if #(GetEntityCoords(cache.ped) - PointCoords) > 1.0 then return end
+		if #(GetEntityCoords(cache.ped) - PointCoords) > 2.5 then return end
 
 		if CurrentPoint == 'clothing' then 
 			OpenCloakroomMenu()
