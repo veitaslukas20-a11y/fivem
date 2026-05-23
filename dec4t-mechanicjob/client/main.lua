@@ -213,10 +213,25 @@ RegisterNetEvent('dec4t-mechanicjob:onFixkit', function()
 end)
 
 local Points = {}
+local Blips = {}
 local InsidePoint, CurrentPoint, PointInfo = false, nil, nil
 local PointCoords = nil
 function InitZones()
 	local zone = Config.Zones[Job.name]
+	local blipCfg = Config.Blips[Job.name]
+
+	if blipCfg then
+		local blipCoords = #zone.Cloakrooms > 0 and zone.Cloakrooms[1] or zone.Vehicles[1].Spawner
+		local blip = AddBlipForCoord(blipCoords.x, blipCoords.y, blipCoords.z)
+		SetBlipSprite(blip, blipCfg.sprite)
+		SetBlipColour(blip, blipCfg.color)
+		SetBlipScale(blip, blipCfg.scale)
+		SetBlipAsShortRange(blip, true)
+		BeginTextCommandSetBlipName('STRING')
+		AddTextComponentSubstringPlayerName(blipCfg.label)
+		EndTextCommandSetBlipName(blip)
+		Blips[#Blips + 1] = blip
+	end
 
 	Points['clothing'] = {}
 	for i=1, #zone.Cloakrooms, 1 do
@@ -241,6 +256,11 @@ function InitZones()
 		
 		function point:nearby()
 			DrawMarker(Config.MarkerType.Cloakrooms, self.coords, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.5, 0.5, 0.5, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, true, false, false, false)
+			if #(GetEntityCoords(cache.ped) - self.coords) < 1.5 then
+				BeginTextCommandDisplayHelp('STRING')
+				AddTextComponentSubstringPlayerName('Spauskite ~INPUT_CONTEXT~ ~HUD_COLOUR_FREEMODE~persirengti')
+				EndTextCommandDisplayHelp(0, false, true, -1)
+			end
 		end
 	end
 
@@ -307,12 +327,17 @@ function InitZones()
 end
 
 function RemoveZones()
-	for k,v in pairs(Points) do 
-		for j, h in pairs(Points[k]) do 
+	for k,v in pairs(Points) do
+		for j, h in pairs(Points[k]) do
 			local point = Points[k][j]
 			point:remove()
 		end
 	end
+	Points = {}
+	for _, blip in ipairs(Blips) do
+		RemoveBlip(blip)
+	end
+	Blips = {}
 end
 
 lib.addKeybind({

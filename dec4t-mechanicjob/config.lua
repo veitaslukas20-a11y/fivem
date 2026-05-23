@@ -19,6 +19,18 @@ Config.Jobs = {
 	ukininkai = true,
 }
 
+Config.Blips = {
+	mechanic  = { sprite = 446, color = 5,  scale = 0.8, label = 'Mechanikai' },
+	mechanic2 = { sprite = 446, color = 5,  scale = 0.8, label = 'Mechanikai (Sandy Shores)' },
+	mechanic3 = { sprite = 446, color = 5,  scale = 0.8, label = 'Mechanikai (Paleto Bay)' },
+	mechanic4 = { sprite = 446, color = 5,  scale = 0.8, label = 'Mechanikai (Grapeseed)' },
+	hookan    = { sprite = 446, color = 47, scale = 0.8, label = 'Hookan' },
+	auction   = { sprite = 446, color = 47, scale = 0.8, label = 'Aukcionas' },
+	pearls    = { sprite = 446, color = 47, scale = 0.8, label = 'Pearls' },
+	kebabine  = { sprite = 446, color = 47, scale = 0.8, label = 'Kebabinė' },
+	ukininkai = { sprite = 446, color = 47, scale = 0.8, label = 'Ūkininkai' },
+}
+
 Config.Zones = {
 	mechanic = {
 		Cloakrooms = {
