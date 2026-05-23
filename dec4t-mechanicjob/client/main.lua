@@ -324,9 +324,10 @@ end
 CreateThread(function()
 	for jobName, blipCfg in pairs(Config.Blips) do
 		local zone = Config.Zones[jobName]
-		if zone and zone.Vehicles and #zone.Vehicles > 0 then
-			local blipCoords = #zone.Cloakrooms > 0 and zone.Cloakrooms[1] or zone.Vehicles[1].Spawner
-			local blip = AddBlipForCoord(blipCoords.x, blipCoords.y, blipCoords.z)
+		if not zone then goto continue end
+
+		local function makeBlip(coords)
+			local blip = AddBlipForCoord(coords.x, coords.y, coords.z)
 			SetBlipSprite(blip, blipCfg.sprite)
 			SetBlipColour(blip, blipCfg.color)
 			SetBlipScale(blip, blipCfg.scale)
@@ -335,7 +336,36 @@ CreateThread(function()
 			AddTextComponentSubstringPlayerName(blipCfg.label)
 			EndTextCommandSetBlipName(blip)
 		end
+
+		if #zone.Cloakrooms > 0 then
+			for _, coords in ipairs(zone.Cloakrooms) do
+				makeBlip(coords)
+			end
+		else
+			for _, veh in ipairs(zone.Vehicles) do
+				makeBlip(veh.Spawner)
+			end
+		end
+
+		::continue::
 	end
+end)
+
+AddEventHandler('onClientResourceStart', function(resource)
+	if GetCurrentResourceName() ~= resource then return end
+	CreateThread(function()
+		Wait(500)
+		local xPlayer = ESX.GetPlayerData()
+		if xPlayer and xPlayer.job then
+			Job.grade = xPlayer.job.grade_name
+			Job.name = xPlayer.job.name
+			Job.grade_num = xPlayer.job.grade
+			if IsMechanic() then
+				RemoveZones()
+				InitZones()
+			end
+		end
+	end)
 end)
 
 lib.addKeybind({
