@@ -1,0 +1,19 @@
+@font-face {
+    font-family: Campton;
+    src: url('./font/CamptonBook.otf');
+}
+
+body {
+    user-select: none;
+    overflow: hidden;
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    background: url('./icon/back.png');
+    background-repeat: no-repeat;
+    background-position:top;
+    background-size: cover;
+    height:100%;
+    width:100%;
+}
+
