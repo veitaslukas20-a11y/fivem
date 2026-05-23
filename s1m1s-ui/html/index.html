@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="lt">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./dist/loading-bar.css">
+    <title>s1m1s GangZones</title>
+    <script src="https://kit.fontawesome.com/2a806e65da.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+</head>
+
+<body x-data="Main" x-init="listen">
+
+    <div class="center">
+        <div class="box" x-show="top">
+            <a x-html="text"></a>
+        </div>
+    </div>
+
+    <div class="center">
+        <div class="box2" x-show="bottom">
+            <template x-for="data in keybings">
+                <div class="container">
+                    <a x-html="data.text"></a>
+                    <template x-if="data.key">
+                        <a class="keybing" x-text="data.key"></a>
+                    </template>
+                    <template x-if="data.text2 != ''">
+                        <a x-html="data.text2 || ''"></a>
+                    </template>
+                </div>
+            </template>
+            <template x-if="loading && persent > 0">
+                <div class="loading">
+                    <div class="loader" :style="{width: persent+'%'}"></div>
+                </div>
+            </template>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
