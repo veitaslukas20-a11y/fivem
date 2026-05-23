@@ -1,0 +1,25 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:700italic);
+body {
+	font-family: "Inter", sans-serif;
+	font-weight: bold;
+	font-style: normal;
+	text-align: center;
+	user-select: none;
+}
+#countdown {
+	width: 200px;
+	height: 100px;
+	
+	position: absolute;
+	left: 50%;
+	top: 5%;
+	margin-left: -100px;
+	margin-top: -50px;
+	
+	color: rgb(255,255,255);
+	
+	font-size: 5em;
+	transition: all 0.45s ease 0s;
+	/* background-color: aqua; */
+	border-radius: 360px;
+}
