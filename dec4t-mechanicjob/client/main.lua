@@ -382,7 +382,7 @@ lib.addKeybind({
 		if CurrentPoint == 'clothing' then 
 			OpenCloakroomMenu()
 		elseif CurrentPoint == 'bossactions' then 
-			exports['dec4t-bossmenu']:openMenu(true)
+			exports['s1m1s-bossmenu']:openMenu(true)
 		elseif CurrentPoint == 'vehicles' then 
 			if not PointInfo then return end
 			Garage.OpenMenu(PointInfo)
