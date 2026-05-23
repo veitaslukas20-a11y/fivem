@@ -1,0 +1,348 @@
+local Camera, currentVeh, LockMenu = nil, nil, false
+Garage = {}
+Garage.Vehicles = {}
+
+local function CreateCamera(heading, distance)
+    if not Camera and currentVeh then
+        local forward = GetOffsetFromEntityInWorldCoords(currentVeh, -0.0, distance, 0.0)
+        Camera = CreateCam("DEFAULT_SCRIPTED_CAMERA", true)
+        RenderScriptCams(true, true, 500, 1, 0)
+        SetCamActive(Camera, true)
+        SetCamRot(Camera, -3.0, 0.0, heading - 180)
+        SetCamFov(Camera, 60.0)
+        SetCamCoord(Camera, forward.x, forward.y, forward.z + 0.5)
+    end
+end
+
+local function ClearCamera()
+    if Camera then
+        DestroyCam(Camera)
+        RenderScriptCams(false, true, 500, 1, 0)
+        Camera = nil
+    end
+end
+
+local function EditCamera(heading, distance)
+    if Camera then
+        local forward = GetOffsetFromEntityInWorldCoords(currentVeh, -0.0, distance, 0.0)
+        SetCamRot(Camera, -3.0, 0.0, heading - 180)
+        SetCamFov(Camera, 60.0)
+        SetCamCoord(Camera, forward.x, forward.y, forward.z + 0.5)
+    end
+end
+
+local function SpawnPreview(model, coords)
+    if LockMenu then return end
+    LockMenu = true
+    local distance = 8.0
+    local heading = coords.w
+    local coords = vec3(coords.x, coords.y, coords.z)
+    if currentVeh or DoesEntityExist(currentVeh) then
+        ESX.Game.DeleteVehicle(currentVeh)
+    end
+    if not lib.requestModel(model, 600000) then
+        lib.showContext('jobgarage:shop')
+        LockMenu = false
+        return
+    end
+    ESX.Game.SpawnLocalVehicle(model, coords, heading, function(vehicle)
+        currentVeh = vehicle
+        while not DoesEntityExist(currentVeh) do
+            LockMenu = true
+            lib.showTextUI('Palaukite, kol automobilis bus užkrautas', { position = 'top-center', icon = 'fa-solid fa-car', iconColor = '#3E81FF' })
+            Wait(100)
+        end
+        if LockMenu then
+            if lib.getOpenContextMenu() ~= 'jobgarage:showveh' then
+                lib.hideContext(false)
+                lib.showContext('jobgarage:showveh')
+            end
+        end
+        LockMenu = false
+        lib.hideTextUI()
+        SetEntityCoords(currentVeh, coords, false, false, false, false)
+        PlaceObjectOnGroundProperly(currentVeh)
+        FreezeEntityPosition(currentVeh, true)
+        SetEntityCollision(currentVeh, false)
+        SetVehicleEngineOn(currentVeh, true, true, true)
+        SetVehicleLights(currentVeh, 2)
+        CreateCamera(heading, distance)
+        EditCamera(heading, distance)
+    end)
+end
+
+local function CloseMenu(onExit)
+    if currentVeh or DoesEntityExist(currentVeh) then
+        ESX.Game.DeleteVehicle(currentVeh)
+    end
+    ClearCamera()
+end
+
+function Garage.OpenMenu(data)
+    lib.registerContext({
+        id = 'jobgarage:main',
+        title = 'Darbo garažas',
+        options = {
+            {
+                title = 'Atidaryti garažą',
+                description = 'Peržiūrėkite savo turimas transporto priemones',
+                icon = 'warehouse',
+                onSelect = function()
+                    Garage.OpenGarage(data.type, data.spawns)
+                end,
+            },
+            {
+                title = 'Pastatyti automobilį',
+                description = 'Pastatykite savo transporto priemonę į garažą',
+                icon = 'eraser',
+                onSelect = function()
+                    Garage.StoreVehicle()
+                end,
+            },
+            {
+                title = 'Nusipirkti darbinę tr. priemonę',
+                description = 'Nusipirkite naują darbinę tr. priemonę.',
+                icon = 'cart-shopping',
+                onSelect = function()
+                    Garage.OpenShop(data.type, data.coords, data.vehicles)
+                end,
+            },
+        }
+    })
+    lib.showContext('jobgarage:main')
+end
+
+function Garage.OpenShop(type, coords, vehicles)
+    if not vehicles or #vehicles == 0 then return lib.showContext('jobgarage:main') end
+    local Options = {}
+    for _, vehicle in ipairs(vehicles) do
+        if IsModelValid(vehicle.model) and IsModelInCdimage(vehicle.model) then
+            local vehicleLabel = GetDisplayNameFromVehicleModel(vehicle.model)
+            table.insert(Options, {
+                title = vehicleLabel,
+                description = 'Tr. priemonės kaina '..vehicle.price..'€.',
+                icon = type,
+                onSelect = function()
+                    lib.registerContext({
+                        id = 'jobgarage:showveh',
+                        menu = 'jobgarage:shop',
+                        title = vehicleLabel,
+                        options = {
+                            {
+                                title = 'Pirkti '..vehicleLabel,
+                                description = 'Pirkti '..vehicleLabel..' tr. priemonę už '..vehicle.price..'€.',
+                                icon = 'cart-shopping',
+                                onSelect = function()
+                                    local alert = lib.alertDialog({
+                                        header = 'Ar esate tuom tikras?',
+                                        content = 'Ar tikrai norite pirkti '..vehicleLabel..' už '..vehicle.price..'€.',
+                                        centered = true,
+                                        cancel = true
+                                    })
+                                    lib.showContext('jobgarage:shop')
+                                    if alert == 'confirm' then
+                                        if not currentVeh then return end
+                                        local props = lib.getVehicleProperties(currentVeh)
+                                        props.plate = exports['s1m1s-vehicleshop']:generatePlate('Land')
+                                        if not props.plate then
+                                            exports['1x-hud']:sendNotification({ type = 'ERROR', title = 'Darbinis garažas', message = 'Įvyko klaida bandant įsigyti t. priemonę, bandykite išnaujo.', duration = 5000, icon = 'square-parking' })
+                                        end
+                                        local data = lib.callback.await('s1m1s-jobgarage:buyvehicle', false, {vehicle = vehicle, type = type, props = props})
+                                        if data then
+                                            exports['1x-hud']:sendNotification({ type = 'SUCCESS', title = 'Darbinis garažas', message = string.format('Sėkmingai nusipirkote automobilį su numeriais %s.', data), duration = 5000, icon = 'square-parking' })
+                                        else
+                                            exports['1x-hud']:sendNotification({ type = 'ERROR', title = 'Darbinis garažas', message = 'Deja, neturite pakankamai pinigų nusipirkti šiai tr. priemonei', duration = 5000, icon = 'square-parking' })
+                                        end
+                                    end
+                                end,
+                            },
+                        },
+                        onExit = function()
+                            CloseMenu(true)
+                        end,
+                        onBack = function()
+                            CloseMenu(true)
+                        end,
+                    })
+                    lib.showContext('jobgarage:showveh')
+                    SpawnPreview(vehicle.model, coords)
+                end,
+            })
+        end
+    end
+    if #Options > 0 then
+        lib.registerContext({
+            id = 'jobgarage:shop',
+            title = 'Tr. priemonių parduotuvė',
+            menu = 'jobgarage:main',
+            options = Options,
+            onExit = function()
+                CloseMenu(true)
+            end,
+            onBack = function()
+                CloseMenu(true)
+            end,
+        })
+        lib.showContext('jobgarage:shop')
+    else
+        lib.showContext('jobgarage:main')
+    end
+end
+
+function Garage.OpenGarage(type, spawns)
+    local vehicles = lib.callback.await('s1m1s-jobgarages:returnJobVeh', false, type)
+    if not vehicles or #vehicles == 0 then
+        exports['1x-hud']:sendNotification({ type = 'ERROR', title = 'Garažas', message = 'Deja, neturite jokių automobilių darbiniame garaže.', duration = 6000, icon = 'warehouse' })
+        return
+    end
+    local Options = {}
+    for _, vehicle in pairs(vehicles) do
+        local props = json.decode(vehicle.vehicle)
+        if IsModelValid(props.model) and IsModelInCdimage(props.model) then
+            local vehicleLabel = GetDisplayNameFromVehicleModel(props.model)
+            table.insert(Options, {
+                title = vehicleLabel,
+                description = 'Išsitraukite '..vehicleLabel..' tr. priemonę. Numeriai: '..props.plate,
+                icon = (type == 'car' and 'car' or 'helicopter'),
+                onSelect = function()
+                    local chosen = nil
+                    for _, v in pairs(spawns) do
+                        if not IsAnyVehicleNearPoint(v.coords.x, v.coords.y, v.coords.z, v.radius) then
+                            chosen = v
+                            break
+                        end
+                    end
+                    if not chosen then
+                        exports['1x-hud']:sendNotification({ type = 'ERROR', title = 'Garažas', message = 'Nėra laisvos stovėjimo vietos.', duration = 5000, icon = 'warehouse' })
+                        return
+                    end
+                    DoScreenFadeOut(200)
+                    local ok, err = pcall(function()
+                        local netid = lib.callback.await('s1m1s-jobgarages:spawnVehicle', false, type, props.plate, chosen.coords)
+                        if not netid then error('Nepavyko gauti transporto netID') end
+                        table.insert(Garage.Vehicles, netid)
+                        local veh, t = NetworkGetEntityFromNetworkId(netid), GetGameTimer()
+                        while (not veh or not DoesEntityExist(veh)) and GetGameTimer() - t < 10000 do
+                            Wait(50)
+                            veh = NetworkGetEntityFromNetworkId(netid)
+                        end
+                        if not veh or not DoesEntityExist(veh) then error('Transporto entity nepasirodė (timeout)') end
+                        if props.plate then SetVehicleNumberPlateText(veh, props.plate) end
+                        -- Duoti raktus žaidėjui
+                        TriggerServerEvent('carkeys:giveInitialKey', props.plate)
+                        SetVehicleOnGroundProperly(veh)
+                        SetEntityCollision(veh, true, true)
+                        FreezeEntityPosition(veh, false)
+                        SetEntityVisible(veh, true, false)
+                        if IsVehicleSeatFree(veh, -1) then
+                            TaskWarpPedIntoVehicle(cache.ped, veh, -1)
+                        else
+                            local px,py,pz = table.unpack(GetOffsetFromEntityInWorldCoords(veh, -2.0, 2.0, 0.0))
+                            SetEntityCoords(cache.ped, px, py, pz, false, false, false, false)
+                        end
+                        Entity(veh).state.fuel = 100
+                        local signalization = lib.callback.await('s1m1s-signalization:getSignalization', false)
+                        if signalization == 4 then
+                            exports['s1m1s-signalizacija']:insertVehicle(props.plate, veh)
+                        end
+                    end)
+                    DoScreenFadeIn(200)
+                    if not ok then
+                        exports['1x-hud']:sendNotification({ type = 'ERROR', title = 'Garažas', message = 'Nepavyko ištraukti: '..tostring(err), duration = 6000, icon = 'warehouse' })
+                    end
+                end,
+            })
+        end
+    end
+    if #Options > 0 then
+        lib.registerContext({
+            id = 'jobgarage:garage',
+            title = 'Tr. priemonių parduotuvė',
+            menu = 'jobgarage:main',
+            options = Options
+        })
+        lib.showContext('jobgarage:garage')
+    else
+        lib.showContext('jobgarage:main')
+    end
+end
+
+function Garage.StoreVehicle()
+    if #Garage.Vehicles < 1 then
+        exports['1x-hud']:sendNotification({ type = 'ERROR', title = 'Garažas', message = 'Deja, nesate ištraukęs jokių automobilių.', duration = 6000, icon = 'warehouse' })
+        return
+    end
+    local Deleted, toRemove = 0, {}
+    local pcoords = GetEntityCoords(cache.ped)
+    for idx, netId in ipairs(Garage.Vehicles) do
+        local veh = NetworkGetEntityFromNetworkId(netId)
+        if veh and DoesEntityExist(veh) then
+            if #(pcoords - GetEntityCoords(veh)) <= 15.0 then
+                TriggerServerEvent('s1m1s-jobgarages:deleteveh', netId)
+                Deleted = Deleted + 1
+                table.insert(toRemove, 1, idx)
+            end
+        else
+            table.insert(toRemove, 1, idx)
+        end
+    end
+    for _, idx in ipairs(toRemove) do
+        table.remove(Garage.Vehicles, idx)
+    end
+    if Deleted > 0 then
+        exports['1x-hud']:sendNotification({ type = 'SUCCESS', title = 'Garažas', message = 'Sėkmingai pastatėte jūsų ištrauktus automobilius.', duration = 6000, icon = 'warehouse' })
+    else
+        exports['1x-hud']:sendNotification({ type = 'ERROR', title = 'Garažas', message = 'Deja, nėra jokių automobilių esančių šalia jūsų, kuriuos būtumėte ištraukęs.', duration = 6000, icon = 'warehouse' })
+    end
+end
+
+RegisterNetEvent('s1m1s-jobgarages:clientApplyProps', function(netId, props, plate)
+    local veh = NetworkGetEntityFromNetworkId(netId)
+    local t = GetGameTimer()
+    while (not veh or not DoesEntityExist(veh)) and GetGameTimer() - t < 10000 do
+        Wait(50)
+        veh = NetworkGetEntityFromNetworkId(netId)
+    end
+    if not veh or not DoesEntityExist(veh) then return end
+    lib.setVehicleProperties(veh, props)
+    if plate then SetVehicleNumberPlateText(veh, plate) end
+    SetVehicleOnGroundProperly(veh)
+    SetEntityCollision(veh, true, true)
+    FreezeEntityPosition(veh, false)
+    SetEntityVisible(veh, true, false)
+end)
+
+lib.callback.register('s1m1s-jobgarages:getVehProps', function(netId)
+    local veh = NetworkGetEntityFromNetworkId(netId)
+    if not veh or not DoesEntityExist(veh) then return nil end
+    if exports['s1m1s-garagev3'] and exports['s1m1s-garagev3'].GetVehicleProperties then
+        local ok, props = pcall(function()
+            return lib.getVehicleProperties(veh)
+        end)
+        if ok then return props end
+    end
+    return nil
+end)
+
+exports('initGarages', function()
+    return Garage
+end)
+
+RegisterNetEvent('s1m1s-jobgarages:clientSeat', function(netId)
+    local deadline = GetGameTimer() + 8000
+    local veh
+    while GetGameTimer() < deadline do
+        if NetworkDoesEntityExistWithNetworkId(netId) then
+            veh = NetworkGetEntityFromNetworkId(netId)
+            if veh and DoesEntityExist(veh) then break end
+        end
+        Wait(100)
+    end
+    if veh and DoesEntityExist(veh) then
+        TaskWarpPedIntoVehicle(PlayerPedId(), veh, -1)
+    end
+end)
+
+RegisterNetEvent('s1m1s-jobgarages:clearFade', function()
+    DoScreenFadeIn(0)
+end)
