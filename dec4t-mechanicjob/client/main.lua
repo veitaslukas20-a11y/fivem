@@ -213,25 +213,10 @@ RegisterNetEvent('dec4t-mechanicjob:onFixkit', function()
 end)
 
 local Points = {}
-local Blips = {}
 local InsidePoint, CurrentPoint, PointInfo = false, nil, nil
 local PointCoords = nil
 function InitZones()
 	local zone = Config.Zones[Job.name]
-	local blipCfg = Config.Blips[Job.name]
-
-	if blipCfg then
-		local blipCoords = #zone.Cloakrooms > 0 and zone.Cloakrooms[1] or zone.Vehicles[1].Spawner
-		local blip = AddBlipForCoord(blipCoords.x, blipCoords.y, blipCoords.z)
-		SetBlipSprite(blip, blipCfg.sprite)
-		SetBlipColour(blip, blipCfg.color)
-		SetBlipScale(blip, blipCfg.scale)
-		SetBlipAsShortRange(blip, true)
-		BeginTextCommandSetBlipName('STRING')
-		AddTextComponentSubstringPlayerName(blipCfg.label)
-		EndTextCommandSetBlipName(blip)
-		Blips[#Blips + 1] = blip
-	end
 
 	Points['clothing'] = {}
 	for i=1, #zone.Cloakrooms, 1 do
@@ -334,11 +319,24 @@ function RemoveZones()
 		end
 	end
 	Points = {}
-	for _, blip in ipairs(Blips) do
-		RemoveBlip(blip)
-	end
-	Blips = {}
 end
+
+CreateThread(function()
+	for jobName, blipCfg in pairs(Config.Blips) do
+		local zone = Config.Zones[jobName]
+		if zone and zone.Vehicles and #zone.Vehicles > 0 then
+			local blipCoords = #zone.Cloakrooms > 0 and zone.Cloakrooms[1] or zone.Vehicles[1].Spawner
+			local blip = AddBlipForCoord(blipCoords.x, blipCoords.y, blipCoords.z)
+			SetBlipSprite(blip, blipCfg.sprite)
+			SetBlipColour(blip, blipCfg.color)
+			SetBlipScale(blip, blipCfg.scale)
+			SetBlipAsShortRange(blip, true)
+			BeginTextCommandSetBlipName('STRING')
+			AddTextComponentSubstringPlayerName(blipCfg.label)
+			EndTextCommandSetBlipName(blip)
+		end
+	end
+end)
 
 lib.addKeybind({
     name = 'mechanicmenu',
