@@ -221,39 +221,33 @@ end)
 local Points = {}
 local InsidePoint, CurrentPoint, PointInfo = false, nil, nil
 local PointCoords = nil
+local inCloakroom = false
+local ClothingActive = false
 function InitZones()
 	local zone = Config.Zones[Job.name]
 
-	Points['clothing'] = {}
-	for i=1, #zone.Cloakrooms, 1 do
-		Points['clothing'][i] = lib.points.new({
-			coords = zone.Cloakrooms[i],
-			distance = 3.0,
-		})
-		
-		local point = Points['clothing'][i]
-
-		function point:onEnter()
-			InsidePoint = true
-			CurrentPoint = 'clothing'
-			PointCoords = zone.Cloakrooms[i]
-		end
-		
-		function point:onExit()
-			InsidePoint = false
-			CurrentPoint = nil
-			PointCoords = nil
-		end
-		
-		function point:nearby()
-			DrawMarker(Config.MarkerType.Cloakrooms, self.coords, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.5, 0.5, 0.5, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, true, false, false, false)
-			if #(GetEntityCoords(cache.ped) - self.coords) < 2.5 then
-				BeginTextCommandDisplayHelp('STRING')
-				AddTextComponentSubstringPlayerName('Spauskite ~INPUT_CONTEXT~ ~HUD_COLOUR_FREEMODE~persirengti')
-				EndTextCommandDisplayHelp(0, false, true, -1)
+	ClothingActive = true
+	CreateThread(function()
+		while ClothingActive do
+			local pedCoords = GetEntityCoords(cache.ped)
+			local nearby = false
+			for _, coords in ipairs(zone.Cloakrooms) do
+				local dist = #(pedCoords - coords)
+				if dist <= 3.0 then
+					nearby = true
+					DrawMarker(Config.MarkerType.Cloakrooms, coords, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.5, 0.5, 0.5, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, true, false, false, false)
+					if dist <= 2.5 then
+						BeginTextCommandDisplayHelp('STRING')
+						AddTextComponentSubstringPlayerName('Spauskite ~INPUT_CONTEXT~ ~HUD_COLOUR_FREEMODE~persirengti')
+						EndTextCommandDisplayHelp(0, false, true, -1)
+					end
+				end
 			end
+			inCloakroom = nearby
+			if nearby then Wait(0) else Wait(300) end
 		end
-	end
+		inCloakroom = false
+	end)
 
 	Points['vehicles'] = {}
 	for i=1, #zone.Vehicles, 1 do
@@ -318,6 +312,8 @@ function InitZones()
 end
 
 function RemoveZones()
+	ClothingActive = false
+	inCloakroom = false
 	for k,v in pairs(Points) do
 		for j, h in pairs(Points[k]) do
 			local point = Points[k][j]
@@ -379,21 +375,15 @@ lib.addKeybind({
     description = 'Mechaniku meniu',
     defaultKey = 'E',
     onPressed = function(self)
-        if not InsidePoint then return end
-		local pedCoords = GetEntityCoords(cache.ped)
-
-		if Points['clothing'] then
-			for _, point in pairs(Points['clothing']) do
-				if #(pedCoords - point.coords) <= 2.5 then
-					OpenCloakroomMenu()
-					return
-				end
-			end
+		if inCloakroom then
+			OpenCloakroomMenu()
+			return
 		end
 
+		if not InsidePoint then return end
 		if not CurrentPoint then return end
 		if not PointCoords then return end
-		if #(pedCoords - PointCoords) > 2.5 then return end
+		if #(GetEntityCoords(cache.ped) - PointCoords) > 2.5 then return end
 
 		if CurrentPoint == 'bossactions' then
 			exports['s1m1s-bossmenu']:openMenu(true)
