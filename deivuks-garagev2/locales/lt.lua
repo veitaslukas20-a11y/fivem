@@ -1,0 +1,41 @@
+locale['lt'] = {
+    ['draw_text'] = '[~d~E~w~] Atidaryti Garaza',
+    ['open_garage'] = 'Atidaryti Garaza',
+    ['open_store'] = 'Pastatyti Automobilį',
+    ['take_out'] = 'Išsitraukti',
+    ['garage'] = 'Garažas',
+    ['vehicles'] = 'Automobiliai',
+    ['impound'] = 'KMA',
+    ['place_occupied'] = 'Vieta šiuo metu užimta.',
+    ['not_owner'] = 'Automobilis jums nepriklauso!',
+    ['stored'] = 'Automobilis sėkmingai pastatytas į garažą!',
+    ['taken_out'] = 'Automobilis sėkmingai ištrauktas iš garažo!',
+    ['not_found'] = 'Automobilis nebuvo rastas!',
+    ['no_vehicles'] = 'Jūs neturite automobilių garaže!',
+    ['veh_confiscated'] = 'Šis automobilis yra konfiskuotas!',
+    ['veh_not_confiscated'] = 'Šis automobilis nėra konfiskuotas!',
+    ['store_price'] = 'Jūs susimokėjote už automobilio pastatymą ',
+    ['takeout_price'] = 'Jūs susimokėjote už automobilio išsiėmimą iš garažo ',
+    ['impound_price'] = 'Jūs susimokėjote už automobilio išsiėmimą iš kma ',
+    ['cool_down'] = 'Turite palaukti %s minučių, kad galėtumėte išsivaryti automobilį.',
+    ['does_not_exist'] = 'Automobilis neegzistuoja.',
+
+    ['vehicle_already_exist'] = 'Automobilis jau egzistuoja, prašome jį pastatyti į garažą, kad galėtumėte jį vėl išsitraukti.',
+    
+    --Blips
+    ['blip_garage_land'] = 'Automobiliu Garazas',
+    ['blip_garage_water'] = 'Laivu Garazas',
+    ['blip_garage_sky'] = 'Lektuvu Garazas',
+    ['blip_impound_land'] = 'Automobiliu KMA',
+    ['blip_impound_water'] = 'Laivu KMA',
+    ['blip_impound_sky'] = 'Lektuvu KMA',
+
+    --HTML
+    ['engine'] = 'Variklis',
+    ['body'] = 'Kėbulas',
+    ['tank'] = 'Kuro bakas',
+    ['fuel'] = 'Kuras',
+    ['take_out_html'] = 'Išsitraukti automobilį',
+    ['exit'] = 'Uždaryti',
+    ['search'] = 'Ieškoti automobilio...',
+}

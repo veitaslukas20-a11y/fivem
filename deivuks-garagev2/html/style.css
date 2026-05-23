@@ -1,0 +1,25 @@
+@font-face {
+    font-family: 'MazzardSoftH-Light';
+    src: url('./fonts/MazzardSoftH-Light.otf');
+}
+
+@font-face {
+    font-family: 'MazzardSoftH-Medium';
+    src: url('./fonts/MazzardSoftH-Medium.otf');
+}
+
+@font-face {
+    font-family: 'MazzardSoftH-Regular';
+    src: url('./fonts/MazzardSoftH-Regular.otf');
+}
+
+@font-face {
+    font-family: 'MazzardSoftH-Thin';
+    src: url('./fonts/MazzardSoftH-Thin.otf');
+}
+
+
+body {
+    user-select:none;
+    overflow: hidden;
+}
