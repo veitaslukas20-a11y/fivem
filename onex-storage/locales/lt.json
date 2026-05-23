@@ -1,0 +1,15 @@
+{
+    "small_storage": "Mažo dydžio sandėlis",
+    "medium_storage": "Vidutinio dydžio sandėlis",
+    "large_storage": "Didelio dydžio sandėlis",
+    "not_found": "Sandėlis nebuvo rastas.",
+    "over_the_limit": "Deja, jau pasiekėte turimų sandėlių limitą.",
+    "same_type": "Deja, jau turite maksimalų kiekį šio tipo sandėlių, todėl nebegalite pirkti šio sandėlio.",
+    "no_money": "Deja, nepakanka lėšų esančių jūsų sąskaitoje šiam sandėliui įsigyti.",
+    "couldnt_buy": "Deja, nepavyko įsigyti sandėlio, bandykite dar kartą.",
+    "bought_warehouse": "Sandėlis buvo sėkmingai įsigytas.",
+    "sold_warehouse": "Sandėlis buvo sėkmingai parduotas.",
+    "coudnt_sell": "Deja, nepavyko parduoti sandėlio.",
+    "no_access": "Deja, neturite prieeigos prie sandėlio.",
+    "not_vip": "Deja, neturite prieeigos prie VIP sandėlių."
+}

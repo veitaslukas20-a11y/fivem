@@ -1,0 +1,12 @@
+{
+    "medium_storage": "Vidutinio dydžio sandėlis.",
+    "not_found": "Sandėlis nebuvo rastas.",
+    "over_the_limit": "Deja, jau pasiekėte turimų sandėlių limitą.",
+    "same_type": "Deja, jau turite tokio tipo sandėlį, todėl nebegalite jo nusipirkti.",
+    "no_money": "Deja, nepakanka lėšų esančių jūsų sąskaitoje šiam sandėliui įsigyti.",
+    "couldnt_buy": "Deja, nepavyko įsigyti sandėlio, bandykite dar kartą.",
+    "bought_warehouse": "Sandėlis buvo sėkmingai įsigytas.",
+    "coudnt_sell": "Deja, nepavyko parduoti sandėlio.",
+    "no_access": "Deja, neturite prieeigos prie sandėlio.",
+    "not_vip": "Deja, neturite prieeigos prie VIP sandėlių."
+}
