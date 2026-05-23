@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TWOX HUD</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="hud-root">
+  <div class="top-hud">
+      <div class="datetime-box">
+          <div id="date-indicator">2025.01.01</div>
+          <div id="time-indicator">00:00</div>
+      </div>
+      <div class="players-box">
+          Prisijungusių <span id="player-count">0</span>
+      </div>
+      <div class="logo-block">
+          <img src="logo.png" class="hud-logo" alt="logo">
+          <div class="player-id-box">
+              ID <span id="player-id-value">0</span>
+          </div>
+      </div>
+  </div>
+
+  <div id="hud" class="hud">
+      <div class="stat-container health">
+          <div class="circular-progress" id="health-progress">
+  <svg class="progress-ring" viewBox="0 0 60 60" width="50" height="50">
+      <circle class="outer-circle" r="22" cx="30" cy="30"/>
+      <circle class="progress-bg" r="18" cx="30" cy="30"/>
+      <circle class="progress-circle" r="18" cx="30" cy="30"/>
+  </svg>
+  <div class="icon">
+              <img src="icons/health.svg" alt="health" />
+          </div>
+      </div>
+  </div>
+
+      <div class="stat-container armor">
+          <div class="circular-progress" id="armor-progress">
+  <svg class="progress-ring" viewBox="0 0 60 60" width="50" height="50">
+      <circle class="outer-circle" r="22" cx="30" cy="30"/>
+      <circle class="progress-bg" r="18" cx="30" cy="30"/>
+      <circle class="progress-circle" r="18" cx="30" cy="30"/>
+  </svg>
+  <div class="icon">
+              <img src="icons/armor.svg" alt="armor" />
+          </div>
+      </div>
+  </div>
+
+      <div class="stat-container hunger">
+          <div class="circular-progress" id="hunger-progress">
+  <svg class="progress-ring" viewBox="0 0 60 60" width="50" height="50">
+      <circle class="outer-circle" r="22" cx="30" cy="30"/>
+      <circle class="progress-bg" r="18" cx="30" cy="30"/>
+      <circle class="progress-circle" r="18" cx="30" cy="30"/>
+  </svg>
+  <div class="icon">
+              <img src="icons/hunger.svg" alt="hunger" />
+          </div>
+      </div>
+  </div>
+
+      <div class="stat-container thirst">
+          <div class="circular-progress" id="thirst-progress">
+  <svg class="progress-ring" viewBox="0 0 60 60" width="50" height="50">
+      <circle class="outer-circle" r="22" cx="30" cy="30"/>
+      <circle class="progress-bg" r="18" cx="30" cy="30"/>
+      <circle class="progress-circle" r="18" cx="30" cy="30"/>
+  </svg>
+  <div class="icon">
+              <img src="icons/thirst.svg" alt="thirst" />
+          </div>
+      </div>
+  </div>
+  </div>
+
+  <div class="speed-container">
+      <div id="speed">000</div>
+  </div>
+
+<div class="vehicle-hud" id="vehicle-hud">
+  <div class="vehicle-indicators">
+
+<div class="vehicle-indicator" id="ind-engine" title="Engine">
+      <img src="icons/engine.svg" alt="Engine" class="indicator-icon">
+      <span class="indicator-dot"></span>
+    </div>
+
+    <div class="vehicle-indicator" id="ind-headlight" title="Headlight">
+      <img src="icons/lights.svg" alt="Headlight" class="indicator-icon">
+      <span class="indicator-dot"></span>
+    </div>
+
+    <div class="vehicle-indicator" id="ind-seatbelt" title="Seatbelt">
+      <img src="icons/seatbelt.svg" alt="Seatbelt" class="indicator-icon">
+      <span class="indicator-dot"></span>
+    </div>
+    <div class="vehicle-indicator" id="ind-locked" title="Locked">
+    <i class="fa-solid fa-lock" class="indicator-icon"></i>
+    <span class="indicator-dot"></span> </div>
+</div>
+
+  <div class="vehicle-bottom-row">
+    <div class="mileage-box">
+      <div id="mileage">000000</div>
+    </div>
+
+    <div class="fuel-box">
+      <i class="fa-solid fa-gas-pump fuel-icon"></i>
+      <div class="fuel-bar-outer"><div id="fuel-bar" class="fuel-bar-inner"></div></div>
+      <div id="fuel-text" class="fuel-text">98 L</div>
+    </div>
+
+    <div class="engine-box">
+      <img src="icons/engine.svg" class="engine-icon" alt="Engine">
+      <div class="engine-bar-outer"><div id="engine-bar" class="engine-bar-inner"></div></div>
+      <div id="engine-text" class="engine-text">98%</div>
+    </div>
+  </div>
+</div>
+
+<div id="location-hud-wrapper" style="position: fixed; bottom: 19.5%; left: 1.5%; display: flex; gap: 6px; z-index: 10000; pointer-events: none;">
+    <div id="location-hud" class="location-box">
+        <i class="fa-solid fa-map-marker-alt"></i>
+        <span id="location-text">Unknown</span>
+    </div>
+
+    <div id="safezone-indicator" class="safezone-box" style="display:none;">
+        <i class="fa-solid fa-shield"></i>
+        <span>Saugi zona</span>
+    </div>
+</div>
+
+
+
+    <div id="minimap-notifies"></div>
+    <audio id="notify-sound" src="notification-xFxpJss7.ogg"></audio>
+    <div id="top-notifies"></div>
+<script src="script.js"></script>
+</body>
+</html>
