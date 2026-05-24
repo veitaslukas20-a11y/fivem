@@ -14,7 +14,7 @@ Config.Locale                     = 'en'
 
 Config.EarlyRespawnTimer          = 60000 * 6  -- time til respawn is available
 Config.BleedoutTimer              = 60000 * 10 -- time til the player bleeds out
-Config.BedTimer				 	  = 1000 * 1 -- time til the player is revived in bed	
+Config.BedTimer				 	  = 1000 * 5 -- time til the player is revived in bed
 
 Config.EnablePlayerManagement     = true -- Enable society managing (If you are using esx_society).
 
@@ -144,14 +144,6 @@ Config.AuthorizedVehicles = {
 		},
 
 		vyrdaktaras = {
-			{model = 'gcgmp3', price = 1},
-			{model = 'gcgmp1', price = 1},
-			{model = 'rs6nn', price = 1},
-			{model = 'nm_z71', price = 1},
-			{model = 'dcmd5', price = 1},
-		},
-		
-		chief_doctor = {
 			{model = 'gcgmp3', price = 1},
 			{model = 'gcgmp1', price = 1},
 			{model = 'rs6nn', price = 1},

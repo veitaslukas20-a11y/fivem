@@ -155,6 +155,11 @@ local function StartCrawling()
 	end
 end
 
+exports('StartCrawling', function()
+	CrawlAvailable = true
+	StartCrawling()
+end)
+
 local pressed = false
 local holdh = 0
 local sent, distext, locktime, presscount = false, _U('distress_send'), 0, 0
@@ -179,14 +184,6 @@ exports('StartDistressSignal', function()
 		end
 	end)
 end)
-
-function SendDistressSignal()
-	ESX.ShowNotification(_U('distress_sent'))
-
-	local coords = GetEntityCoords(PlayerPedId())
-	exports["lb-phone"]:SendCompanyCoords('ambulance', nil, false)
-
-end
 
 function StartPositionRefresh()
 	CreateThread(function()
@@ -257,6 +254,7 @@ function SendDistressSignal()
 		duration = 6000,
 		icon = 'staff-snake'
 	})
+	exports["lb-phone"]:SendCompanyCoords('ambulance', nil, false)
 	local data = exports['cd_dispatch']:GetPlayerInfo()
 	TriggerServerEvent('cd_dispatch:AddNotification', {
 		job_table = {'ambulance'},
