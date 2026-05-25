@@ -69,20 +69,3 @@ RegisterNetEvent('esx_billing:isiustiisrasa', function(target, society, reason, 
     end)
 end)
 
--- ✅ ADD THIS EXPORT FOR OX_INVENTORY
-exports('fixkitas', function(event, item, inventory, slot, data)
-    if event == 'usingItem' then
-        local source = inventory.id
-        
-        -- Call your existing callback to remove the item
-        local success = lib.callback.await('s1m1s-mechanicjob:removeFixkit', source)
-        
-        if success then
-            -- Trigger client to start repair animation
-            TriggerClientEvent('s1m1s-mechanicjob:startRepair', source)
-        end
-        
-        return success
-    end
-    return false
-end)

@@ -148,8 +148,8 @@ AddEventHandler('d-mechanic:isonduty', function(cb)
 	OnDuty = false 
 end)
 
-exports('fixkitas', function(source)
-    TriggerEvent('s1m1s-mechanicjob:onFixkit', source)
+exports('fixkitas', function(data, slot)
+    TriggerEvent('s1m1s-mechanicjob:onFixkit')
 end)
 
 RegisterNetEvent('s1m1s-mechanicjob:onFixkit', function()
