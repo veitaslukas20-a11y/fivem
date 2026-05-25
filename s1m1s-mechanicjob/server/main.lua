@@ -2,18 +2,9 @@ ESX = exports['es_extended']:getSharedObject()
 
 -- Kai žaidėjas panaudoja fixkitą
 
--- Callback, kurį kviečia client.lua, kad pašalintų itemą po taisymo
+-- Callback, kurį kviečia client.lua po sėkmingo taisymo
+-- ox_inventory jau pašalino daiktą kai iškviečia server exportą
 lib.callback.register('s1m1s-mechanicjob:removeFixkit', function(source)
-    local xPlayer = ESX.GetPlayerFromId(source)
-    if not xPlayer then return false end
-
-    local item = xPlayer.getInventoryItem('fixkitas')
-    if not item or item.count <= 0 then
-        return false
-    end
-
-    -- Pašalinam tik po sėkmingo taisymo
-    xPlayer.removeInventoryItem('fixkitas', 1)
     return true
 end)
 
