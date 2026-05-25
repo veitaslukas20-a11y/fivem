@@ -17,6 +17,12 @@ lib.callback.register('s1m1s-mechanicjob:removeFixkit', function(source)
     return true
 end)
 
+-- ox_inventory iškviečia šį exportą kai žaidėjas naudoja fixkitas
+exports('fixkitas', function(event, item, inventory, slot, data)
+    local source = inventory.id
+    TriggerClientEvent('s1m1s-mechanicjob:onFixkit', source)
+end)
+
 -- // Transporto priemonės ištrynimas (Impound)
 RegisterNetEvent('s1m1s-mechanic:deleteveh', function(netId)
     local src = source
