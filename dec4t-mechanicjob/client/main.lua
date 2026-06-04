@@ -1,6 +1,12 @@
 local OnDuty = false
 local Job = {}
-local Garage = exports['dec4t-jobgarage']:initGarages()
+local _Garage = nil
+local function Garage()
+    if not _Garage then
+        _Garage = exports['s1m1s-jobgarage']:initGarages()
+    end
+    return _Garage
+end
 
 function IsMechanic()
 	return Config.Jobs[Job.name]
@@ -213,56 +219,35 @@ RegisterNetEvent('dec4t-mechanicjob:onFixkit', function()
 end)
 
 local Points = {}
-local Blips = {}
 local InsidePoint, CurrentPoint, PointInfo = false, nil, nil
 local PointCoords = nil
+local inCloakroom = false
+local ClothingActive = false
 function InitZones()
 	local zone = Config.Zones[Job.name]
-	local blipCfg = Config.Blips[Job.name]
 
-	if blipCfg then
-		local blipCoords = #zone.Cloakrooms > 0 and zone.Cloakrooms[1] or zone.Vehicles[1].Spawner
-		local blip = AddBlipForCoord(blipCoords.x, blipCoords.y, blipCoords.z)
-		SetBlipSprite(blip, blipCfg.sprite)
-		SetBlipColour(blip, blipCfg.color)
-		SetBlipScale(blip, blipCfg.scale)
-		SetBlipAsShortRange(blip, true)
-		BeginTextCommandSetBlipName('STRING')
-		AddTextComponentSubstringPlayerName(blipCfg.label)
-		EndTextCommandSetBlipName(blip)
-		Blips[#Blips + 1] = blip
-	end
-
-	Points['clothing'] = {}
-	for i=1, #zone.Cloakrooms, 1 do
-		Points['clothing'][i] = lib.points.new({
-			coords = zone.Cloakrooms[i],
-			distance = 3.0,
-		})
-		
-		local point = Points['clothing'][i]
-
-		function point:onEnter()
-			InsidePoint = true
-			CurrentPoint = 'clothing'
-			PointCoords = zone.Cloakrooms[i]
-		end
-		
-		function point:onExit()
-			InsidePoint = false
-			CurrentPoint = nil
-			PointCoords = nil
-		end
-		
-		function point:nearby()
-			DrawMarker(Config.MarkerType.Cloakrooms, self.coords, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.5, 0.5, 0.5, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, true, false, false, false)
-			if #(GetEntityCoords(cache.ped) - self.coords) < 1.5 then
-				BeginTextCommandDisplayHelp('STRING')
-				AddTextComponentSubstringPlayerName('Spauskite ~INPUT_CONTEXT~ ~HUD_COLOUR_FREEMODE~persirengti')
-				EndTextCommandDisplayHelp(0, false, true, -1)
+	ClothingActive = true
+	CreateThread(function()
+		while ClothingActive do
+			local pedCoords = GetEntityCoords(cache.ped)
+			local nearby = false
+			for _, coords in ipairs(zone.Cloakrooms) do
+				local dist = #(pedCoords - coords)
+				if dist <= 3.0 then
+					nearby = true
+					DrawMarker(Config.MarkerType.Cloakrooms, coords, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.5, 0.5, 0.5, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, true, false, false, false)
+					if dist <= 2.5 then
+						BeginTextCommandDisplayHelp('STRING')
+						AddTextComponentSubstringPlayerName('Spauskite ~INPUT_CONTEXT~ ~HUD_COLOUR_FREEMODE~persirengti')
+						EndTextCommandDisplayHelp(0, false, true, -1)
+					end
+				end
 			end
+			inCloakroom = nearby
+			if nearby then Wait(0) else Wait(300) end
 		end
-	end
+		inCloakroom = false
+	end)
 
 	Points['vehicles'] = {}
 	for i=1, #zone.Vehicles, 1 do
@@ -327,6 +312,8 @@ function InitZones()
 end
 
 function RemoveZones()
+	ClothingActive = false
+	inCloakroom = false
 	for k,v in pairs(Points) do
 		for j, h in pairs(Points[k]) do
 			local point = Points[k][j]
@@ -334,30 +321,75 @@ function RemoveZones()
 		end
 	end
 	Points = {}
-	for _, blip in ipairs(Blips) do
-		RemoveBlip(blip)
-	end
-	Blips = {}
 end
+
+CreateThread(function()
+	for jobName, blipCfg in pairs(Config.Blips) do
+		local zone = Config.Zones[jobName]
+		if not zone then goto continue end
+
+		local function makeBlip(coords)
+			local blip = AddBlipForCoord(coords.x, coords.y, coords.z)
+			SetBlipSprite(blip, blipCfg.sprite)
+			SetBlipColour(blip, blipCfg.color)
+			SetBlipScale(blip, blipCfg.scale)
+			SetBlipAsShortRange(blip, true)
+			BeginTextCommandSetBlipName('STRING')
+			AddTextComponentSubstringPlayerName(blipCfg.label)
+			EndTextCommandSetBlipName(blip)
+		end
+
+		if #zone.Cloakrooms > 0 then
+			for _, coords in ipairs(zone.Cloakrooms) do
+				makeBlip(coords)
+			end
+		else
+			for _, veh in ipairs(zone.Vehicles) do
+				makeBlip(veh.Spawner)
+			end
+		end
+
+		::continue::
+	end
+end)
+
+AddEventHandler('onClientResourceStart', function(resource)
+	if GetCurrentResourceName() ~= resource then return end
+	CreateThread(function()
+		Wait(500)
+		local xPlayer = ESX.GetPlayerData()
+		if xPlayer and xPlayer.job then
+			Job.grade = xPlayer.job.grade_name
+			Job.name = xPlayer.job.name
+			Job.grade_num = xPlayer.job.grade
+			if IsMechanic() then
+				RemoveZones()
+				InitZones()
+			end
+		end
+	end)
+end)
 
 lib.addKeybind({
     name = 'mechanicmenu',
     description = 'Mechaniku meniu',
     defaultKey = 'E',
     onPressed = function(self)
-        if not InsidePoint then return end
+		if inCloakroom then
+			OpenCloakroomMenu()
+			return
+		end
+
+		if not InsidePoint then return end
 		if not CurrentPoint then return end
 		if not PointCoords then return end
+		if #(GetEntityCoords(cache.ped) - PointCoords) > 2.5 then return end
 
-		if #(GetEntityCoords(cache.ped) - PointCoords) > 1.0 then return end
-
-		if CurrentPoint == 'clothing' then 
-			OpenCloakroomMenu()
-		elseif CurrentPoint == 'bossactions' then 
-			exports['dec4t-bossmenu']:openMenu(true)
-		elseif CurrentPoint == 'vehicles' then 
+		if CurrentPoint == 'bossactions' then
+			exports['s1m1s-bossmenu']:openMenu(true)
+		elseif CurrentPoint == 'vehicles' then
 			if not PointInfo then return end
-			Garage.OpenMenu(PointInfo)
+			Garage().OpenMenu(PointInfo)
 		end
     end,
 })

@@ -1,6 +1,12 @@
 local OnDuty = false
 local Job = {}
-local Garage = exports['s1m1s-jobgarage']:initGarages()
+local _Garage = nil
+local function Garage()
+    if not _Garage then
+        _Garage = exports['s1m1s-jobgarage']:initGarages()
+    end
+    return _Garage
+end
 
 function IsMechanic()
 	return Config.Jobs[Job.name]
@@ -148,8 +154,8 @@ AddEventHandler('d-mechanic:isonduty', function(cb)
 	OnDuty = false 
 end)
 
-exports('fixkitas', function(source)
-    TriggerEvent('s1m1s-mechanicjob:onFixkit', source)
+exports('fixkitas', function(data, slot)
+    TriggerEvent('s1m1s-mechanicjob:onFixkit')
 end)
 
 RegisterNetEvent('s1m1s-mechanicjob:onFixkit', function()
@@ -342,7 +348,7 @@ lib.addKeybind({
 			exports['s1m1s-bossmenu']:openMenu(true)
 		elseif CurrentPoint == 'vehicles' then 
 			if not PointInfo then return end
-			Garage.OpenMenu(PointInfo)
+			Garage().OpenMenu(PointInfo)
 		end
     end,
 })
